@@ -2,18 +2,12 @@ import React, {Component} from 'react'
 import {TaskInput} from './taskInput/TaskInput'
 import {Item} from './Item'
 import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-
-// web kit: https://material-ui.com/getting-started/usage/
 
 //task item terá prioridade, tags etc
 //no futuro ischecked pode voltar ao invés de remover []
 //tem que permitir editar
 
-const PRIORITIES = ["Low", "Medium", "High"]
-const COLORS = ["gray", "orange", "red"]
-
-class TaskList extends React.Component { 
+class TaskList extends Component { 
   constructor(props) {
     super(props);
 
@@ -21,7 +15,7 @@ class TaskList extends React.Component {
       list: [{ //serve como exemplo de como deverá ser o objeto
         taskname: "Teste", 
         isChecked: false, 
-        priority: "Low", //3 níveis baixa(white), media(orange) e alta(red)
+        priority: "Low", //3 níveis Low(gray), medium(orange) e high(red)
         color: "gray",
         tags: ["Brincadeira"], 
         description: "Vamos brincar de adoletar",
@@ -77,6 +71,9 @@ class TaskList extends React.Component {
   }
 
   handleColorPriority() {
+    const PRIORITIES = ["Low", "Medium", "High"]
+    const COLORS = ["gray", "orange", "red"]
+
     const idx = PRIORITIES.indexOf(this.state.priority)
     
     return COLORS[idx]

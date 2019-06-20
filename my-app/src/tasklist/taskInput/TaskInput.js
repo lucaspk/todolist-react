@@ -8,7 +8,7 @@ import { makeStyles } from '@material-ui/core/styles'
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
-    //flexWrap: 'wrap',
+    //flexWrap: 'nowrap',
   },
   formControl: {
     margin: theme.spacing(1),
@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
 export const TaskInput = (props) => {
   const classes = useStyles();
     return <form className={classes.root} onSubmit={props.onSubmitTask}>
-                <FormControl className={classes.formControl}>
+                <FormControl className={classes.root}>
                   <TextField
                     autoComplete="off"
                     variant="outlined"
@@ -32,7 +32,7 @@ export const TaskInput = (props) => {
                     value={props.taskname}
                     onChange={props.onChangeTaskName}
                     margin="normal"
-                    multiline="true"
+                    multiline={true}
                   />
                   <PriorityInput 
                       changeTaskPriority={props.onChangeTaskPriority}

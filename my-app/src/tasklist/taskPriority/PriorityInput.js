@@ -14,8 +14,6 @@ const useStyles = makeStyles(theme => ({
     },
   }));
 
-
-
 export const PriorityInput = (props) => { 
     const classes = useStyles()
     return  (
@@ -24,12 +22,12 @@ export const PriorityInput = (props) => {
             <Select
                 onChange={props.changeTaskPriority} 
                 value={props.value}
-                inputProps={{
-                    name: 'priority',
-                    id: 'priority-select',
+                inputProps={
+                    {
+                        name: 'priority',
+                        id: 'priority-select',
                     }
-                }
-                > 
+                }> 
                     {PRIORITIES.map((priority, index) => (
                         <MenuItem key={index} value={priority} style={{backgroundColor: COLORS[index]}}>
                             {priority}
