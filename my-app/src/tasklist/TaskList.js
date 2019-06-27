@@ -1,7 +1,11 @@
 import React, {Component} from 'react'
 import {TaskInput} from './taskInput/TaskInput'
 import {Item} from './Item'
-import List from '@material-ui/core/List'
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
 
 //task item terá prioridade, tags etc
 //no futuro ischecked pode voltar ao invés de remover []
@@ -79,50 +83,64 @@ class TaskList extends Component {
     return COLORS[idx]
   }
 
-  createTaskInput() { //acho melhor transformar em um function component dps passando Tasklist
+  renderTaskInput() { //acho melhor transformar em um function component dps passando Tasklist
 
-    return <TaskInput
-              onSubmitTask={this.handleSubmit}
-              onChangeTaskName={this.handleChangeTaskName}
-              taskname={this.state.taskname}
-              onChangeTaskPriority={this.handleChangeTaskPriority}
-              priority={this.state.priority}
-              priorityColor={this.handleColorPriority}
-            />
+    return <ul>
+              <TaskInput
+                onSubmitTask={this.handleSubmit}
+                onChangeTaskName={this.handleChangeTaskName}
+                taskname={this.state.taskname}
+                onChangeTaskPriority={this.handleChangeTaskPriority}
+                priority={this.state.priority}
+                priorityColor={this.handleColorPriority}
+              />
+            </ul>
+  }
+
+  renderTaskTable(list) {
+    return (
+      <Paper id="paper">
+        <Table>   
+          <TableBody>     
+            {list.map((task, index) => (
+              <TableRow key={index}>
+                <TableCell component="th" scope="row" id="cell">
+                  <Item 
+                    taskname={task.taskname}
+                    priority={task.priority}
+                    isChecked={task.isChecked}
+                    description={task.description}
+                    tags={task.tags}
+                    subTasks={task.subTasks}
+                    key={index}
+                    bgcolor={task.color} 
+                    removeTask={() => this.handleRemoveTask(task.taskname)} /> 
+                </TableCell>
+              </TableRow>
+            ))} 
+          </TableBody>
+        </Table>
+      </Paper>
+    );
   }
 
   //criar tasks a partir da lista
   renderTasks() {
     const list = this.state.list
     console.log(list)
-    return (
-      <List>
-        {list.map((task, index) => (
-          <Item 
-            taskname={task.taskname}
-            priority={task.priority}
-            isChecked={task.isChecked}
-            description={task.description}
-            tags={task.tags}
-            subTasks={task.subTasks}
-            key={index}
-            bgcolor={task.color} 
-            removeTask={() => this.handleRemoveTask(task.taskname)} /> 
-        ))}        
-      </List>
-    );
+    return this.renderTaskTable(list)
   }
 
   renderTaskList() {
-    return <ul> {this.renderTasks()} </ul>
+    return this.renderTasks()
   }
 
   render() {
-    return <div className="task-list">
-            <h1>Task List for {this.state.user}</h1>
-            {this.createTaskInput()}
-            {this.renderTaskList()}
-          </div>
+    return  <div>
+              <h1>Task List for {this.state.user}</h1>
+              {this.renderTaskInput()}
+              {this.renderTaskList()}
+            </div>
   }
 }
 

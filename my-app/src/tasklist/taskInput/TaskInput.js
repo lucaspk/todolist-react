@@ -8,7 +8,9 @@ import { makeStyles } from '@material-ui/core/styles'
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
-    //flexWrap: 'nowrap',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   formControl: {
     margin: theme.spacing(1),
@@ -17,31 +19,39 @@ const useStyles = makeStyles(theme => ({
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
+  item: {
+    flex: 0.2,  
+  }
 }));
-
+//acho que isso no formato de tabela tb eh melhor
 export const TaskInput = (props) => {
   const classes = useStyles();
-    return <form className={classes.root} onSubmit={props.onSubmitTask}>
+  return <form onSubmit={props.onSubmitTask} >
                 <FormControl className={classes.root}>
-                  <TextField
-                    autoComplete="off"
-                    variant="outlined"
-                    placeholder="Type your task here..."
-                    id="task-name"
-                    label="Task Name"
-                    value={props.taskname}
-                    onChange={props.onChangeTaskName}
-                    margin="normal"
-                    multiline={true}
-                  />
-                  <PriorityInput 
-                      changeTaskPriority={props.onChangeTaskPriority}
-                      value={props.priority}
-                      priorityColor={props.priorityColor}
-                  />
-                  <Button variant="contained" type="submit">
-                    Add
-                  </Button>
+                  <div className={classes.item}> 
+                    <TextField
+                      autoComplete="off"
+                      variant="outlined"
+                      placeholder="Type your task here..."
+                      label="Task Name"
+                      value={props.taskname}
+                      onChange={props.onChangeTaskName}
+                      margin="normal"
+                      multiline={true}
+                    /> 
+                  </div >
+                  <div className={classes.item}> 
+                    <PriorityInput 
+                        changeTaskPriority={props.onChangeTaskPriority}
+                        value={props.priority}
+                        priorityColor={props.priorityColor}
+                    />
+                  </div>
+                  <div className={classes.item}>
+                    <Button variant="contained" id="add-button" type="submit">
+                      Add
+                    </Button>
+                  </div>
                 </FormControl>
             </form>
   }
