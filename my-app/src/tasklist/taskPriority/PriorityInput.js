@@ -14,17 +14,17 @@ export const PriorityInput = (props) => {
             <Select
                 onChange={props.changeTaskPriority} 
                 value={props.value}
-                inputProps={
+                inputProps={{
+                    name: 'priority',
+                    id: 'priority-select',
+                }}> 
                     {
-                        name: 'priority',
-                        id: 'priority-select',
-                    }
-                }> 
-                    {PRIORITIES.map((priority, index) => (
+                        PRIORITIES.map((priority, index) => (
                         <MenuItem key={index} value={priority} style={{backgroundColor: COLORS[index]}}>
                             {priority}
                         </MenuItem>
-                    ))}
+                        ))
+                    }
             </Select>
         </FormControl>
     )

@@ -6,10 +6,11 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import InputBase from '@material-ui/core/InputBase';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import {TaskTodoInfo} from './TaskTodoInfo';
 
-//task item terá prioridade, tags etc
 //no futuro ischecked pode voltar ao invés de remover []
-//tem que permitir editar
 
 class TaskList extends Component { 
   constructor(props) {
@@ -19,7 +20,7 @@ class TaskList extends Component {
       list: [{ //serve como exemplo de como deverá ser o objeto
         taskname: "Teste", 
         isChecked: false, 
-        priority: "Low", //3 níveis Low(gray), medium(orange) e high(red)
+        priority: "Low", 
         color: "gray",
         tags: ["Brincadeira"], 
         description: "Vamos brincar de adoletar",
@@ -28,6 +29,7 @@ class TaskList extends Component {
       user: "Lucas",
       taskname: '',
       priority: "Low",
+      tasklistName: "Tasklist Name",
     };
 
     this.handleChangeTaskPriority = this.handleChangeTaskPriority.bind(this);
@@ -83,7 +85,7 @@ class TaskList extends Component {
     return COLORS[idx]
   }
 
-  renderTaskInput() { //acho melhor transformar em um function component dps passando Tasklist
+  renderTaskInput() { 
 
     return <ul>
               <TaskInput
@@ -97,25 +99,47 @@ class TaskList extends Component {
             </ul>
   }
 
+  renderTableItem(task, index) {
+    return (
+            <TableCell component="th" scope="row" id="cell">
+              <Item 
+                taskname={task.taskname}
+                priority={task.priority}
+                isChecked={task.isChecked}
+                description={task.description}
+                tags={task.tags}
+                subTasks={task.subTasks}
+                key={index}
+                bgcolor={task.color} 
+                removeTask={() => this.handleRemoveTask(task.taskname)} /> 
+            </TableCell>
+      );
+  }
+
+  renderTaskListName() {
+    return (
+      <TableRow id="tasklistname-row">
+        <TableCell component="th" scope="row" id="cell">
+            <InputBase id="tasklist-name"
+              defaultValue={this.state.tasklistName}
+              inputProps={{ 'aria-label': 'naked' }}
+              margin="normal"
+            />
+            <FormHelperText>You can change the tasklist name if you want. Just click on the name.</FormHelperText>
+        </TableCell>
+      </TableRow>
+    );
+  }
+
   renderTaskTable(list) {
     return (
       <Paper id="paper">
         <Table>   
-          <TableBody>     
+          <TableBody>
+            {this.renderTaskListName()}
             {list.map((task, index) => (
               <TableRow key={index}>
-                <TableCell component="th" scope="row" id="cell">
-                  <Item 
-                    taskname={task.taskname}
-                    priority={task.priority}
-                    isChecked={task.isChecked}
-                    description={task.description}
-                    tags={task.tags}
-                    subTasks={task.subTasks}
-                    key={index}
-                    bgcolor={task.color} 
-                    removeTask={() => this.handleRemoveTask(task.taskname)} /> 
-                </TableCell>
+                {this.renderTableItem(task, index)}
               </TableRow>
             ))} 
           </TableBody>
@@ -124,20 +148,20 @@ class TaskList extends Component {
     );
   }
 
-  //criar tasks a partir da lista
-  renderTasks() {
+  renderTaskList() {
     const list = this.state.list
     console.log(list)
     return this.renderTaskTable(list)
   }
 
-  renderTaskList() {
-    return this.renderTasks()
+  renderTasksTodoMsg() {
+    return <TaskTodoInfo len={this.state.list.length}/>
   }
 
   render() {
     return  <div>
               <h1>Task List for {this.state.user}</h1>
+              {this.renderTasksTodoMsg()}
               {this.renderTaskInput()}
               {this.renderTaskList()}
             </div>

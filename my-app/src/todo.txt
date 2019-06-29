@@ -1,0 +1,26 @@
+MOST IMPORTANT
+- add task [x]
+- remove task [x]
+- task priority [x] - 3 níveis Low(gray), medium(orange) e high(red)
+- task list as a table [x]
+- how many tasks are remaining [x]
+- name of tasklist [x] (the header of the table)
+    - add name [x]
+    - editable name [x]
+>> Todo:
+    - task input as part of the table [] (talvez usar input ao invés de textfield)
+    - edit task [] (abrir modal com tudo ou editar lá no próximo tasklist?)
+    - several tasklists []
+
+
+ADDITIONAL FEATURES
+- subtasks []
+- task description []
+- task tags []
+- email remainder []
+- due date []
+- how many time you've worked on this task? (U can start pomodoro timer for a certain task) []
+    - by default a pomodoro timer. But the timer should be editable []
+- export tasklist []
+- import tasklist []
+- analytics []

@@ -19,3 +19,13 @@ body {
   max-width: 50%;
   margin: auto;
 }
+
+#tasklist-name {
+  font-weight: bold;
+
+}
+
+#tasklistname-row:hover {
+  background-color: beige;
+  
+}
