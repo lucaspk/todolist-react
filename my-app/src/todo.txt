@@ -11,7 +11,7 @@ MOST IMPORTANT
     - task input as part of the table [] (talvez usar input ao invés de textfield)
     - edit task [] (abrir modal com tudo ou editar lá no próximo tasklist?)
     - several tasklists []
-
+    - mudar o nome dos onchangeXXXX para onchange nos function components (facilitar na hora de escrever os props) []
 
 ADDITIONAL FEATURES
 - subtasks []
@@ -24,3 +24,9 @@ ADDITIONAL FEATURES
 - export tasklist []
 - import tasklist []
 - analytics []
+
+
+
+#Notes
+- event.preventDefault() serve p/ prevenir/cancelar evento antes que ele se propague. Ex: ao tentar digitar numero em caixa de texto, ele n deixa 
+e reclama que esta sendo digitado algo invalido.
