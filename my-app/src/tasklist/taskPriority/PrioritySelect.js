@@ -1,8 +1,10 @@
 import React from 'react'
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 
-export const PrioritySelect = (props) => {
+const renderPrioritySelect = (props) => {
     let priority = props.priority
     let idx = props.PRIORITIES.indexOf(priority)
 
@@ -18,4 +20,13 @@ export const PrioritySelect = (props) => {
                         ))
                     }
             </Select>
+}
+
+export const PrioritySelect = (props) => {
+    return (
+        <FormControl>
+            <InputLabel htmlFor="priority-select">Priority</InputLabel>
+            {renderPrioritySelect(props)}
+        </FormControl>
+    )
 }

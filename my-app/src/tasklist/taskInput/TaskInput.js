@@ -1,9 +1,9 @@
 import React from 'react'
-import {PriorityInput} from '../taskPriority/PriorityInput'
 import Button from '@material-ui/core/Button'
 import FormControl from '@material-ui/core/FormControl'
 import { makeStyles } from '@material-ui/core/styles'
 import { TaskNameInput } from './TaskNameInput';
+import {PrioritySelect} from '../taskPriority/PrioritySelect';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -28,9 +28,13 @@ const renderTaskNameInput = (props) => {
 }
 
 const renderPriorityInput = (props) => {
-  return  <PriorityInput 
-            changeTaskPriority={props.onChangeTaskPriority}
+  const PRIORITIES = ["Low", "Medium", "High"]
+  const COLORS = ["gray", "orange", "red"]
+  return  <PrioritySelect 
+            onChange={props.onChangeTaskPriority} 
             priority={props.priority}
+            PRIORITIES={PRIORITIES}
+            COLORS={COLORS}
           />
 }
 
